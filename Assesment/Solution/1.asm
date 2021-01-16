@@ -1,0 +1,33 @@
+.MODEL SMALL
+    .STACK 100H
+
+.DATA
+     PROMPT_1 DB "ENTER A ALPHABET YOU WANT TO CONVERT: $"
+     PROMPT_2 DB 0DH,0AH, "THE UPPER CASE LETTER IS:  $"
+.CODE
+MAIN PROC
+    MOV AX, @DATA
+    MOV DS, AX
+
+    LEA DX, PROMPT_1    ;load and display the PROMPT_1
+    MOV AH, 9 
+    INT 21H
+
+    MOV AH, 1
+    INT 21H
+    MOV BL, AL 
+
+    LEA DX, PROMPT_2    ;load and display the PROMPT_2
+    MOV AH, 9
+    INT 21H
+
+    SUB BL, 32
+
+    MOV AH, 2
+    MOV DL, BL
+    INT 21H
+
+    MOV AH, 4CH
+    INT 21H
+  MAIN ENDP
+END MAIN
